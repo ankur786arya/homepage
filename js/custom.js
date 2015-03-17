@@ -453,3 +453,15 @@ function initialize(id) {
 		}
 	}
 }
+
+
+$(document).ready(function(){
+	$('a','.nav').click(function(e){
+		var section = $(this).attr('rel');
+		if(section!=''){
+			e.preventDefault();
+			var scrollTo = $('#section-'+section).offset().top;
+			$("html, body").animate({scrollTop:scrollTo+'px'},800,'easeInExpo');
+		}
+	});
+});
