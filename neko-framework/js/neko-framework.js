@@ -506,6 +506,12 @@
 			}
 
 		});
+		
+		$('a.tips','#freewall article .icon-links').click(function(e){
+			e.preventDefault();
+			//$(this).parents('article').addClass('w2 ht2');
+			//$.stellar('refresh');
+		});
 
 
 	}

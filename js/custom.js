@@ -460,12 +460,14 @@ $(document).ready(function(){
 		var section = $(this).attr('rel');
 		if(section!=''){
 			e.preventDefault();
-			var scrollTo = $('#section-'+section).offset().top;
+			$('a','.nav').removeClass('active');
+			$(this).addClass('active');
+			var scrollTo = section=='home'?0:$('#section-'+section).offset().top-50;
 			$("html, body").animate({scrollTop:scrollTo+'px'},800,'easeInExpo');
 		}
 	});
 	
-	$('.pricingBox > p:last-child').before('<div class="priceBox"></div>');
+	$('.pricingBox > p:last-child').before('<div class="priceBox-mo"></div><div class="priceBox-info-mo">Price/user/mo (A)</div><div class="priceBox"></div><div class="priceBox-info">Monthly Price (paid annually)</div>');
 	
 	$('#products .pricingTableBox').on('click',function(){
 		var $this=$(this),
@@ -481,6 +483,8 @@ $(document).ready(function(){
 			thisCTA.find('.priceBox:eq('+counter+')').html(price);
 			counter++;
 		});
+		var pmprice = $this.find('li:last span').html();
+		thisCTA.find('.priceBox-mo').html(pmprice);
 
 		if (thisTab.is('#server')){
 			thisTab.find('.inner').attr('id',thisID);
