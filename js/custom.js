@@ -466,6 +466,7 @@ $(document).ready(function(){
 	});
 	
 	$('.pricingBox > p:last-child').before('<div class="priceBox"></div>');
+	
 	$('#products .pricingTableBox').on('click',function(){
 		var $this=$(this),
 			thisTable=$this.closest('.pricingCTATable'),
@@ -519,6 +520,11 @@ function init(){
 			thisTab=$this.closest('.tabsContent');
 		thisTab.addClass('col'+colNum);
 	});
+	
+	var twidth = $('.pricingCTATable').innerWidth()-5;
+	var tcount = $('.pricingTableBox','.pricingCTATable').length;
+	var tboxwidth = (twidth/tcount);
+	$('.pricingTableBox','.pricingCTATable').css({width:tboxwidth+'px'});
 }
 function updateQueryStringParameter(url, key, value) {
 	var re = new RegExp("([?|&])" + key + "=.*?(&|$)", "i");
