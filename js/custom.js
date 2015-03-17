@@ -464,4 +464,69 @@ $(document).ready(function(){
 			$("html, body").animate({scrollTop:scrollTo+'px'},800,'easeInExpo');
 		}
 	});
+	
+	$('.pricingBox > p:last-child').before('<div class="priceBox"></div>');
+	$('#products .pricingTableBox').on('click',function(){
+		var $this=$(this),
+			thisTable=$this.closest('.pricingCTATable'),
+			thisTab=thisTable.closest('.tabsContent'),
+			thisCTA=$this.closest('.inner').find('.pricingCTA'),
+			thisID=$.trim($this.attr('class').replace('pricingTableBox','').replace('selected','')),
+			thisClass=$.trim($this.attr('class').replace('pricingTableBox','').replace('selected','').replace('user','').replace('ent','&enterprise=true')),
+			counter=0;
+		thisTable.find('.pricingTableBox').removeClass('selected');
+		$this.addClass('selected').find('li span').each(function(){
+			var price=$(this).html();
+			thisCTA.find('.priceBox:eq('+counter+')').html(price);
+			counter++;
+		});
+
+		if (thisTab.is('#server')){
+			thisTab.find('.inner').attr('id',thisID);
+			var buyLink=thisCTA.find('.pricingBox .cta');
+		}
+		else{
+			var buyLink=thisCTA.find('.pricingBox .button');
+		}
+		buyLink.each(function(){
+			var $this=$(this),
+				url=$this.attr('href').replace('&enterprise=true','');
+			if (url.indexOf("unitCount") >= 0){
+				var url=updateQueryStringParameter(url, 'unitCount', thisClass);
+				$this.attr('href',url);
+			}else if(url.indexOf("?") >= 0){
+				$this.attr('href',url+'&unitCount='+thisClass);
+			}else{
+				$this.attr('href',url+'?unitCount='+thisClass);
+			}
+		});
+
+	});
+
+
+	init();
+
 });
+
+
+function init(){
+	$('.pricingCTATable .pricingTableBox:first-child').trigger('click');
+	$('.wrapper').css('opacity',1);
+	$('.pricingTableBox').find('li').hide().filter(':first-child').show();
+	$('.pricingCTA').each(function(){
+		var $this=$(this),
+			colNum=$this.find('.pricingBox').length,
+			thisTab=$this.closest('.tabsContent');
+		thisTab.addClass('col'+colNum);
+	});
+}
+function updateQueryStringParameter(url, key, value) {
+	var re = new RegExp("([?|&])" + key + "=.*?(&|$)", "i");
+	separator = url.indexOf('?') !== -1 ? "&" : "?";
+	if (url.match(re)) {
+		return url.replace(re, '$1' + key + "=" + value + '$2');
+	}
+	else {
+		return url + separator + key + "=" + value;
+	}
+}
