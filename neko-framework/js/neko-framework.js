@@ -507,6 +507,8 @@
 
 		});
 		
+		$(".filter-label").eq(0).trigger('click');
+		
 		$('a.tips','#freewall article .icon-links').click(function(e){
 			e.preventDefault();
 			//$(this).parents('article').addClass('w2 ht2');

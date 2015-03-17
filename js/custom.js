@@ -464,6 +464,9 @@ $(document).ready(function(){
 			$(this).addClass('active');
 			var scrollTo = section=='home'?0:$('#section-'+section).offset().top-50;
 			$("html, body").animate({scrollTop:scrollTo+'px'},800,'easeInExpo');
+			if($(window).width()<=1024){
+				$('.navbar-toggle').trigger('click');
+			}
 		}
 	});
 	
