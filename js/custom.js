@@ -488,27 +488,6 @@ $(document).ready(function(){
 		});
 		var pmprice = $this.find('li:last span').html();
 		thisCTA.find('.priceBox-mo').html(pmprice);
-
-		if (thisTab.is('#server')){
-			thisTab.find('.inner').attr('id',thisID);
-			var buyLink=thisCTA.find('.pricingBox .cta');
-		}
-		else{
-			var buyLink=thisCTA.find('.pricingBox .button');
-		}
-		buyLink.each(function(){
-			var $this=$(this),
-				url=$this.attr('href').replace('&enterprise=true','');
-			if (url.indexOf("unitCount") >= 0){
-				var url=updateQueryStringParameter(url, 'unitCount', thisClass);
-				$this.attr('href',url);
-			}else if(url.indexOf("?") >= 0){
-				$this.attr('href',url+'&unitCount='+thisClass);
-			}else{
-				$this.attr('href',url+'?unitCount='+thisClass);
-			}
-		});
-
 	});
 
 
