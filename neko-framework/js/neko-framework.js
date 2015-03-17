@@ -698,6 +698,9 @@ $( window ).load(function() {
 
 		});
 		
+		$('#filters button').eq(0).trigger('click');
+		
+		
 	}
 
 
